@@ -7,9 +7,9 @@ public class BubbleSort extends SimpleArr {
     }
 
     public void sortSmallToLarge(){
-        for (int i = 0; i < this.arr.length; i++) {
-            for (int j = 0; j < this.arr.length; j++) {
-                if (arr[j] < arr[j+1]){
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j+1]){
                     swap( j,j+1);
                 }
             }
@@ -17,10 +17,10 @@ public class BubbleSort extends SimpleArr {
     }
 
     public void sortLargeToSmall(){
-        for (int i = this.arr.length - 1; i > 0; i--) {
-            for (int j = this.arr.length - 1; j > 0; j--) {
-                if (arr[j - 1] > arr[j]){
-                    swap( j -1 ,j);
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] < arr[j+1]){
+                    swap( j ,  j+1);
                 }
             }
         }

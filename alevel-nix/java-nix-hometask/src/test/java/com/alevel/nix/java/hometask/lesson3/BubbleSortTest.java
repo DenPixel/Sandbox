@@ -25,5 +25,10 @@ class BubbleSortTest {
 
     @Test
     void sortLargeToSmall() {
+        int arr[] = {26, 13, 2, 65};
+        int expRusult[] = {2, 13, 26, 65};
+        BubbleSort bubbleSort = new BubbleSort(arr);
+        bubbleSort.sortSmallToLarge();
+        assertArrayEquals(expRusult, bubbleSort.getArr());
     }
 }
