@@ -1,2 +1,5 @@
-out/
-.class
+# IDEA
+.idea/
+*.iml
+# Maven
+target/
