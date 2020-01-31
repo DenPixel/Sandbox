@@ -13,4 +13,8 @@ public class SimpleArr {
         }
         System.out.println();
     }
+
+    public int[] getArr() {
+        return arr;
+    }
 }

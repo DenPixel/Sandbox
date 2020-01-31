@@ -30,7 +30,7 @@ public class ArrFromArr extends SimpleArr {
         }
     }
 
-
-
-
+    public int[] getNewArr() {
+        return newArr;
+    }
 }
