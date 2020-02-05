@@ -19,9 +19,9 @@ class FizzBuzzTest {
     @Test
     void getDivisorStr() {
         FizzBuzz fizzBuzz[] = new FizzBuzz[3];
-        String expStr[] ={"fizz fizz fizzbuzz buzz fizzbuzz fizz ",
-                "",
-                "fizz buzz fizz fizzbuzz "};
+        String expStr[] ={"fizz fizz fizzbuzz 7 buzz fizzbuzz fizz ",
+                "0",
+                "fizz buzz fizz 5 7 fizzbuzz 5 1 "};
 
         fizzBuzz[0] = new FizzBuzz(-4_637_628);
         fizzBuzz[1] = new FizzBuzz(0);
