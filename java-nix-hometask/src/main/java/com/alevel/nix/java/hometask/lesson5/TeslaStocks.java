@@ -1,26 +1,26 @@
 package com.alevel.nix.java.hometask.lesson5;
 
-public class TeslaActions {
-    private double actions[] = new double[7], profit = 0;
+public class TeslaStocks {
+    private double stocks[] = new double[7], profit = 0;
     private int firstDay, secondDay;
 
-    TeslaActions(){
+    TeslaStocks(){
         setActions();
         maxProfit();
     }
 
     private void setActions() {
-        for (int i = 0, length = actions.length; i < length; i++) {
-            actions[i] =(double) Math.round(Math.random() * 10000) /100 ;
+        for (int i = 0, length = stocks.length; i < length; i++) {
+            stocks[i] =(double) Math.round(Math.random() * 10000) /100 ;
         }
     }
 
     private void maxProfit(){
-        int length = actions.length;
+        int length = stocks.length;
         for (int i = 0; i < length; i++) {
             for (int j = i+1; j < length; j++) {
-                if(actions[i] < actions[j] && (actions[j] - actions[i]) > profit){
-                    profit = (double) Math.round((actions[j] - actions[i]) * 100) /100;
+                if(stocks[i] < stocks[j] && (stocks[j] - stocks[i]) > profit){
+                    profit = (double) Math.round((stocks[j] - stocks[i]) * 100) /100;
                     secondDay = j;
                     firstDay = i;
                 }
@@ -35,7 +35,7 @@ public class TeslaActions {
         System.out.println("Day of sale = " + secondDay);
     }
 
-    public double[] getActions() {
-        return actions;
+    public double[] getStocks() {
+        return stocks;
     }
 }
