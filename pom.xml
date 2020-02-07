@@ -11,6 +11,8 @@
     <modules>
         <module>core</module>
         <module>java-nix-hometask</module>
+        <module>java-nix-classwork</module>
+        <module>classwork</module>
     </modules>
 
     <packaging>pom</packaging>
