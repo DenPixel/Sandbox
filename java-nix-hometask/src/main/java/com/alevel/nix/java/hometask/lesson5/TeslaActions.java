@@ -11,7 +11,7 @@ public class TeslaActions {
 
     private void setActions() {
         for (int i = 0, length = actions.length; i < length; i++) {
-            actions[i] = Math.round(Math.random() * 10000) /100 ;
+            actions[i] =(double) Math.round(Math.random() * 10000) /100 ;
         }
     }
 
@@ -19,8 +19,8 @@ public class TeslaActions {
         int length = actions.length;
         for (int i = 0; i < length; i++) {
             for (int j = i+1; j < length; j++) {
-                if(actions[i] < actions[j] && (actions[j] - actions[j]) > profit){
-                    profit = actions[j] - actions[j];
+                if(actions[i] < actions[j] && (actions[j] - actions[i]) > profit){
+                    profit = (double) Math.round((actions[j] - actions[i]) * 100) /100;
                     secondDay = j;
                     firstDay = i;
                 }
@@ -35,4 +35,7 @@ public class TeslaActions {
         System.out.println("Day of sale = " + secondDay);
     }
 
+    public double[] getActions() {
+        return actions;
+    }
 }
