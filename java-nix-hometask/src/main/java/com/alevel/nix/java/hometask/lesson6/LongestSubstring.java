@@ -27,9 +27,4 @@ public class LongestSubstring {
     public int getCountRepeatChar() {
         return countRepeatChar;
     }
-
-
-
-
-
 }
