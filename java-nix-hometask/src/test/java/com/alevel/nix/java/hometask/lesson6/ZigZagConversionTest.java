@@ -24,6 +24,6 @@ class ZigZagConversionTest {
     void test(String expRes, String str, int numRows){
         ZigZagConversion zigZagConversion = new ZigZagConversion(str, numRows);
 
-        assertArrayEquals(expRes.toCharArray(), );
+        assertArrayEquals(expRes.toCharArray(), zigZagConversion.getNewStr().toCharArray());
     }
 }

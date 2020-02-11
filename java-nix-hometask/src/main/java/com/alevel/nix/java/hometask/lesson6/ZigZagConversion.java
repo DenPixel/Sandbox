@@ -17,12 +17,14 @@ public class ZigZagConversion {
             newStr += str.charAt(i);
         }
 
-        for (int i = 1; i < numRows; i++) {
+        for (int i = 1; i < numRows - 1; i++) {
 
-            for (int j = i; j < length; j++) {
+            for (int j = i; j < length; j += (numRows - i - 1) * 2 ) {
 
                 if(){
-                    newStr += str.charAt();
+                    newStr += str.charAt(j);
+                }else{
+                    newStr += str.charAt(j + (numRows - i - 1));
                 }
 
             }
