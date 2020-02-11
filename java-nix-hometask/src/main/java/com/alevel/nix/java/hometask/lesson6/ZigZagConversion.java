@@ -38,8 +38,6 @@ public class ZigZagConversion {
         for (int i = numRows - 1 ; i < length; i += (numRows - 1) * 2) {
             newStr += str.charAt(i);
         }
-
-        System.out.println(newStr);
     }
 
 
