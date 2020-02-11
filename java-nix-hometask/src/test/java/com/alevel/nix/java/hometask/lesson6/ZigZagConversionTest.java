@@ -18,7 +18,11 @@ class ZigZagConversionTest {
 
     @Test
     void getNewStr() {
-        test("dfivorohykjonnig", "dvynkofrjiooihng", 4);
+        test("dfivorohcykjonbnig", "dvynkofrjiooihngbc", 4);
+        test("dkjibvnoriohgcyfon", "dvynkofrjiooihngbc", 3);
+        test("dykfjoinbvnoriohgc", "dvynkofrjiooihngbc", 2);
+        test("dvynkofrjiooihngbc", "dvynkofrjiooihngbc", 1);
+        test("HloyredelMFin", "HelloMyFriend", 2);
     }
 
     void test(String expRes, String str, int numRows){

@@ -13,27 +13,33 @@ public class ZigZagConversion {
     private void toZigZag(){
         int length = str.length();
 
+        if(numRows <= 1){
+            newStr = str;
+            return;
+        }
+
         for (int i = 0; i < length; i += (numRows - 1) * 2) {
             newStr += str.charAt(i);
         }
 
-        // должно чередоваться
         for (int i = 1; i < numRows - 1; i++) {
-
-            for (int j = i; j < length; j += (numRows - i - 1) * 2 ) {
-
-                if(){
-                    newStr += str.charAt(j);
+            boolean alternate = false;
+            for (int j = i; j < length;) {
+                newStr += str.charAt(j);
+                if(alternate){
+                    j += i * 2;
                 }else{
-                    newStr += str.charAt(j + (numRows - i - 1));
+                    j += (numRows - i - 1) * 2;
                 }
-
+                alternate = !alternate;
             }
         }
 
         for (int i = numRows - 1 ; i < length; i += (numRows - 1) * 2) {
             newStr += str.charAt(i);
         }
+
+        System.out.println(newStr);
     }
 
 
