@@ -17,6 +17,7 @@ public class ZigZagConversion {
             newStr += str.charAt(i);
         }
 
+        // должно чередоваться
         for (int i = 1; i < numRows - 1; i++) {
 
             for (int j = i; j < length; j += (numRows - i - 1) * 2 ) {
@@ -28,7 +29,6 @@ public class ZigZagConversion {
                 }
 
             }
-
         }
 
         for (int i = numRows - 1 ; i < length; i += (numRows - 1) * 2) {
