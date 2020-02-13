@@ -25,6 +25,6 @@ class ImplemetReverseTest {
 
     void test(CharSequence expRes, CharSequence str){
         ImplemetReverse im = new ImplemetReverse();
-        assertEquals(expRes, im.subSeq(str));
+        assertEquals(expRes, im.reverse(str));
     }
 }
