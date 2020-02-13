@@ -18,7 +18,7 @@ public class ZigZagConversion {
             return;
         }
 
-        for (int i = 0; i < length; i += (numRows - 1) * 2) {
+        for (int i = 0; i < length; i += (numRows - 1) << 1) {
             newStr += str.charAt(i);
         }
 
@@ -27,15 +27,15 @@ public class ZigZagConversion {
             for (int j = i; j < length;) {
                 newStr += str.charAt(j);
                 if(alternate){
-                    j += i * 2;
+                    j += i << 1;
                 }else{
-                    j += (numRows - i - 1) * 2;
+                    j += (numRows - i - 1) << 1;
                 }
                 alternate = !alternate;
             }
         }
 
-        for (int i = numRows - 1 ; i < length; i += (numRows - 1) * 2) {
+        for (int i = numRows - 1 ; i < length; i += (numRows - 1) << 1) {
             newStr += str.charAt(i);
         }
     }

@@ -22,7 +22,7 @@ class LongestSubstringTest {
         test(0, "");
         test(6, "qwerty");
         test(3, "qweqweqweqwe");
-        test(3, "фпофп");
+        test(3, "qwwkew");
         test(2, "azazazaza");
     }
 
