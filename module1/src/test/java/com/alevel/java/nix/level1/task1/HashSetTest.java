@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UniqueNumbsTest {
+class HashSetTest {
 
     @BeforeEach
     void setUp() {
@@ -24,7 +24,7 @@ class UniqueNumbsTest {
     }
 
     void test(int expRes, int ... numbs){
-        UniqueNumbs un = new UniqueNumbs();
+        HashSet un = new HashSet();
         assertEquals(expRes, un.countUniqueNumbs(numbs));
     }
 }

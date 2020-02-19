@@ -1,5 +1,6 @@
 package com.alevel.java.nix.level2.task1;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -16,28 +17,57 @@ public class SequenceOfBrackets {
 
     public boolean isLineValid(String str){
         int length = str.length();
-        Vector key = new Vector();
 
         if(length == 0){
             return true;
-        }else if (length % 2 != 0){
+        }
+
+        ArrayDeque<Character> stack = new ArrayDeque<>();
+
+        for (int i = 0; i < length; i++) {
+            if(chars.containsKey(str.charAt(i))){
+                stack.addLast(str.charAt(i));
+            }else if(chars.containsValue(str.charAt(i)) && !stack.isEmpty() &&
+                    chars.get(stack.pollLast()) != str.charAt(i)){
+                return false;
+            }
+        }
+
+        if(!stack.isEmpty()){
             return false;
         }
 
-        for (int i = 0; i < length; i++) {
-//            if(!chars.containsKey(str.charAt(i)) || !chars.containsValue(i)){
-//                return false;
-//            }
-
-            if(chars.containsKey(str.charAt(i))){
-                key.add(str.charAt(i));
-            }else if(chars.containsValue(str.charAt(i)) && chars.get(key.lastElement()) == str.charAt(i)){
-                key.remove(key.size()-1);
-            }else {
-                return false;
-            }
-
-        }
         return true;
     }
+
+
+    /* реализация Миши
+    public boolean validate(String s) {
+        if (s.isEmpty()) return true;
+
+        var stack = new ArrayDeque<Character>();
+
+        for (int i = 0, length = s.length(); i < length; i++) {
+            char current = s.charAt(i);
+            switch (current) {
+                case '{':
+                case '[':
+                case '(':
+                    stack.push(current);
+                    break;
+                case ']':
+                    if (stack.isEmpty() || stack.poll() != '[') return false;
+                    break;
+                case '}':
+                    if (stack.isEmpty() || stack.poll() != '{') return false;
+                    break;
+                case ')':
+                    if (stack.isEmpty() || stack.poll() != '(') return false;
+                    break;
+            }
+        }
+
+        return stack.isEmpty();
+    }
+     */
 }

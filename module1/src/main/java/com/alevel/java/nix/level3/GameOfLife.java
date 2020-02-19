@@ -30,7 +30,7 @@ public class GameOfLife {
     public void step(){
         for (int i = 0, rowLength = cells.length; i < rowLength; i++) {
             for (int j = 0, colLength = cells[i].length; j < colLength; j++) {
-                int count = cells[i][j].getCLN();
+                int count = 0;
 
                 if (i != 0 && j != 0 && cells[i-1][j-1].isLive()){
                     cells[i][j].setCLN(++count);

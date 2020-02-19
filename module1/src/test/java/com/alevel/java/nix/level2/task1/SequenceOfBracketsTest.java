@@ -19,8 +19,11 @@ class SequenceOfBracketsTest {
         test(true,"");
         test(true, "[]");
         test(true, "({}[])");
-        test(false, "vf()");
+        test(true, "vf()");
         test(false, "[][");
+        test(true, "()jkfvj");
+        test(false, "jgnbg((])");
+        test(true, "{jgbnjng}jgbj");
     }
     
     void test(boolean expRes, String str){

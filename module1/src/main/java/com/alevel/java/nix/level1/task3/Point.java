@@ -1,18 +1,18 @@
 package com.alevel.java.nix.level1.task3;
 
 public class Point {
-    private int x, y;
+    private double x, y;
 
-    Point(int x, int y){
+    Point(double x, double y){
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 }

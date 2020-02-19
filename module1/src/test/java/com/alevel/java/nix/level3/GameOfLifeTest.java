@@ -21,5 +21,8 @@ class GameOfLifeTest {
         gol.step();
         System.out.println();
         gol.showCells();
+        gol.step();
+        System.out.println();
+        gol.showCells();
     }
 }
