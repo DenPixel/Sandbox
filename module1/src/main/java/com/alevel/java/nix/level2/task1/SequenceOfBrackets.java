@@ -3,6 +3,10 @@ package com.alevel.java.nix.level2.task1;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
+<<<<<<< HEAD
+=======
+import java.util.Vector;
+>>>>>>> parent of 6c26afa... standart Tasks
 
 public class SequenceOfBrackets {
     private final char VALID_CHARS[] = {'(', ')', '{', '}', '[', ']'};
@@ -25,7 +29,11 @@ public class SequenceOfBrackets {
 
         for (int i = 0; i < length; i++) {
             if(chars.containsKey(str.charAt(i))){
+<<<<<<< HEAD
                 stack.push(str.charAt(i));
+=======
+                stack.addLast(str.charAt(i));
+>>>>>>> parent of 6c26afa... standart Tasks
             }else if(chars.containsValue(str.charAt(i)) && !stack.isEmpty() &&
                     chars.get(stack.pollLast()) != str.charAt(i)){
                 return false;
