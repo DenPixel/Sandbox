@@ -8,27 +8,24 @@ import java.util.Scanner;
 
 public class TicTacToe3x3 implements ITicTacToe {
     private final static Logger log = LoggerFactory.getLogger(TicTacToe3x3.class);
-    private int countStep = 0, sizeGrid = 3;
+    private int countTurn = 0, sizeGrid = 3;
     private char grid[][] = new char[sizeGrid][sizeGrid];
     private String winer = "";
 
-    TicTacToe3x3(){
+
+    @Override
+    public void newGame(){
         for (int i = 0; i < sizeGrid; i++) {
             Arrays.fill(grid[i],' ');
         }
-    }
-
-    @Override
-    public void startGame(){
-        if (winer != ""){
-            log.info("You need to start new game");
-            return;
-        }
+        countTurn = 0;
+        winer = "";
 
         log.info("Start game");
+
         while (winer == ""){
             progress();
-            log.info("Player {} step", countStep % 2 == 0 ? 'x':'0');
+            log.info("Player {} step", countTurn % 2 == 0 ? 'x':'0');
             turn();
         }
 
@@ -37,16 +34,7 @@ public class TicTacToe3x3 implements ITicTacToe {
         getWiner();
     }
 
-    @Override
-    public void newGame(){
-        for (int i = 0; i < sizeGrid; i++) {
-            Arrays.fill(grid[i],' ');
-        }
-        countStep = 0;
-        winer = "";
 
-        startGame();
-    }
 
     @Override
     public boolean turn(){
@@ -54,18 +42,18 @@ public class TicTacToe3x3 implements ITicTacToe {
         int row = scanner.nextInt();
         int col = scanner.nextInt();
 
-        if(!canTurn(--row,--col)){
+        if(!canTurn(row,col)){
             log.info("Player can't step");
             return false;
         }
 
-        grid[row][col] = countStep++ % 2 == 0 ? 'x' : '0';
+        grid[row][col] = countTurn++ % 2 == 0 ? 'x' : '0';
 
-        if (countStep > 5){
+        if (countTurn > 5){
             checkWin();
         }
 
-        log.info("Player stepped");
+        log.info("Player stepped on row #{} and col #{}", row, col);
         return true;
     }
 
@@ -75,7 +63,7 @@ public class TicTacToe3x3 implements ITicTacToe {
             return false;
         }
 
-        if (countStep >= 9){
+        if (countTurn >= 9){
             return false;
         }
 
@@ -120,7 +108,7 @@ public class TicTacToe3x3 implements ITicTacToe {
             }
         }
 
-        if (countStep >= 9){
+        if (countTurn >= 9){
             winer += "x0";
         }
 

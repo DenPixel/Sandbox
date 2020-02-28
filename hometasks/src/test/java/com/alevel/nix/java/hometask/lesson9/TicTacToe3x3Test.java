@@ -17,7 +17,7 @@ class TicTacToe3x3Test {
     @Test
     void startGame() {
         TicTacToe3x3 t = new TicTacToe3x3();
-        t.startGame();
+        t.newGame();
     }
 
     @Test
