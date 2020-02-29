@@ -1,8 +1,8 @@
 package com.alevel.nix.java.hometask.lesson13.task1;
 
 public class Student {
-    final String fullName;
-    int age;
+    private String fullName;
+    private int age;
 
     Student(String fullName, int age){
         this.fullName = fullName;

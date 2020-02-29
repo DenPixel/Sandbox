@@ -1,7 +1,7 @@
 package com.alevel.nix.java.hometask.lesson13.task1;
 
 public class ContractStudent extends Student {
-    double contractCost;
+    private double contractCost;
 
     ContractStudent(String fullName, int age, double contractCost){
         super(fullName, age);
