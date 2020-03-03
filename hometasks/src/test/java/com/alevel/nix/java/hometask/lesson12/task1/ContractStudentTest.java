@@ -1,10 +1,8 @@
-package com.alevel.nix.java.hometask.lesson13.task1;
+package com.alevel.nix.java.hometask.lesson12.task1;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ContractStudentTest {
     ContractStudent student;

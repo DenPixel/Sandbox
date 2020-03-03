@@ -1,4 +1,4 @@
-package com.alevel.nix.java.hometask.lesson13.task1;
+package com.alevel.nix.java.hometask.lesson12.task1;
 
 public class ContractStudent extends Student {
     private double contractCost;
