@@ -10,15 +10,13 @@ public class Retry {
 
             try{
                 block.run();
+                return;
             }catch (Exception e){
                 e.getMessage();
-                if (i == maxTry - 1){
-                    throw new Exception();
-                }
-                continue;
             }
-
-            break;
+            if (i == maxTry - 1){
+                throw new Exception();
+            }
         }
     }
 
