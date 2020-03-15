@@ -1,8 +1,8 @@
 package com.alevel.nix.java.hometask.lesson14;
 
-public class Retry {
+public class Retry<T extends Block> {
 
-    public void tryCode(int maxTry, Block block) throws Exception {
+    public void tryCode(int maxTry, T block) throws Exception {
 
         for (int i = 0; i < maxTry; i++){
 
@@ -14,10 +14,9 @@ public class Retry {
             }catch (Exception e){
                 e.getMessage();
             }
-            if (i == maxTry - 1){
-                throw new Exception();
-            }
+
         }
+        throw new Exception();
     }
 
     public static void main(String[] args) {
