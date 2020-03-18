@@ -9,6 +9,19 @@ public class NumbFromStrs {
     public int getNumbFromStrs (String ... strs) {
         Objects.requireNonNull(strs);
 
+//        String str = String.join("", strs);
+//
+//        str = str.chars()
+//                .boxed()
+//                .filter(Character::isDigit)
+//                .map(integer -> String.copyValueOf(Character.toChars(integer)))
+//                .collect(Collectors.joining());
+//
+//        int i = Integer.parseInt(str);
+//        System.out.println(str);
+
+
+
 //        System.out.println(Arrays.stream(strs).count());
 //
 //        for (String str : strs) {
@@ -20,17 +33,17 @@ public class NumbFromStrs {
 //            System.out.println(i[0]);
 //        }
 
-        List<Integer> ff = new ArrayList<>();
-
-        for (String str : strs) {
-            List <Integer> ss =str.chars()
-                    .boxed()
-                    .filter(Character::isDigit)
-                    .collect(Collectors.toList());
-            ff.addAll(ss);
-        }
-
-        System.out.println(ff);
+//        List<Integer> ff = new ArrayList<>();
+//
+//        for (String str : strs) {
+//            List <Integer> ss =str.chars()
+//                    .boxed()
+//                    .filter(Character::isDigit)
+//                    .collect(Collectors.toList());
+//            ff.addAll(ss);
+//        }
+//
+//        System.out.println(ff);
 
 
 //        char[] list= Arrays.stream(strs)
@@ -49,7 +62,12 @@ public class NumbFromStrs {
 //        }
 
 
-//        Arrays.stream(strs).ma
-        return 0;
+
+        return Integer.parseInt(String.join("", strs)
+                .chars()
+                .boxed()
+                .filter(Character::isDigit)
+                .map(integer -> String.copyValueOf(Character.toChars(integer)))
+                .collect(Collectors.joining()));
     }
 }

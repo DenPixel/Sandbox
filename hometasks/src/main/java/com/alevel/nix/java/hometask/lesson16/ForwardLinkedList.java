@@ -9,14 +9,15 @@ public class ForwardLinkedList<E> extends AbstractList<E> {
     private transient Node<E> first;
     private transient Node<E> last;
 
-    private void isLegalIndex(int index) {
+    private boolean isLegalIndex(int index) {
         if(index < 0 || index > size()) throw new IllegalArgumentException();
+        return true;
     }
 
-    private Node<E> getPrevNode(int index) {
+    private Node<E> getNode(int index) {
         Node<E> temp = first;
 
-        for (int i = 1; i < index - 1; i++) {
+        for (int i = 1; i <= index; i++) {
             temp = temp.next;
         }
         return temp;
@@ -56,10 +57,7 @@ public class ForwardLinkedList<E> extends AbstractList<E> {
         return true;
     }
 
-
-
-    @Override
-    public void add(int index, E element) {
+    public boolean newAdd(int index, E element) {
         Objects.nonNull(element);
         isLegalIndex(index);
 
@@ -68,17 +66,17 @@ public class ForwardLinkedList<E> extends AbstractList<E> {
         } else if (index == size){
             addLast(element);
         } else {
-            Node<E> temp = getPrevNode(index);
+            Node<E> temp = getNode(index);
 
             temp.next = new Node<>(element, temp.next);
 
             size++;
         }
 
-
+        return true;
     }
 
-    public void newRemove(int index){
+    public boolean newRemove(int index){
         isLegalIndex(index);
 
         if (index == 0){
@@ -86,25 +84,29 @@ public class ForwardLinkedList<E> extends AbstractList<E> {
         } else if (index == size - 1){
             removeLast();
         } else {
-            Node<E> prevNode = getPrevNode(index);
+            Node<E> prevNode = getNode(index);
             Node<E> itemNode = prevNode.next;
 
             prevNode.next = itemNode.next;
 
             size--;
         }
+
+        return true;
     }
 
-    public void removeFirst(){
+    public boolean removeFirst(){
         first = first.next;
         size--;
+        return true;
     }
 
-    public void removeLast(){
-        Node<E> prevNode = getPrevNode(size - 1);
+    public boolean removeLast(){
+        Node<E> prevNode = getNode(size - 2);
         last = prevNode;
         last.next = null;
         size--;
+        return true;
     }
 
     @Override
@@ -115,7 +117,7 @@ public class ForwardLinkedList<E> extends AbstractList<E> {
         } else if (index == size - 1){
             return getLast();
         }else {
-            return getPrevNode(index+1).item;
+            return getNode(index+1).item;
         }
     }
 
