@@ -1,10 +1,9 @@
-package com.alevel.nix.java.hometask.lesson19.practice;
+package com.alevel.nix.java.hometask.lesson19;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,12 +68,26 @@ public class CsvTable {
 
     }
 
+    /**
+     *
+     * @param path - путь к csv файлу
+     * @throws IOException бросется если файл по данному пути не найден
+     *                  или если файл по данному пути не csv
+     */
     public CsvTable(String path) throws IOException {
 
         if (!setTable(path)) throw new IOException();
 
     }
 
+    /**
+     *
+     * @param row - индекс строки. Отчет начиниется с нуля и заканичивает количеством строк - 1
+     *            если не верно указан бросает IllegalArgumentException
+     * @param col - индекс столбца. Отчет начиниется с нуля и заканичивает количеством столбцов - 1
+     *            если не верно указан бросает IllegalArgumentException
+     * @return возвращает найденый елемент по индексам строки и колонки
+     */
     public String getElement(int row, int col){
         isLegalRow(row);
         isLegalCol(col);
@@ -85,6 +98,14 @@ public class CsvTable {
 
     }
 
+    /**
+     *
+     * @param row - индекс строки. Отчет начиниется с нуля и заканичивает количеством строк - 1
+     *            если не верно указан бросается IllegalArgumentException
+     * @param headText - подтекст заголовка. Берётся первый попавшийся заголовок
+     *                 если не найден заголовок с таким подтекстом бросается IllegalArgumentException
+     * @return возвращает найденый елемент по индексу строки и подтекста заголовка
+     */
     public String getElement(int row, String headText){
         isLegalRow(row);
 
@@ -107,7 +128,7 @@ public class CsvTable {
         CsvTable table;
 
         try {
-            table = new CsvTable("hometasks/src/main/java/com/alevel/nix/java/hometask/lesson19/practice/something.csv");
+            table = new CsvTable("hometasks/src/main/java/com/alevel/nix/java/hometask/lesson19/something.csv");
 
             System.out.println(table.getElement(2, 2));
 
