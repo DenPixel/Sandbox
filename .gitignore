@@ -7,3 +7,4 @@ classwork/
 log/
 *.txt
 *.csv
+!Words.txt

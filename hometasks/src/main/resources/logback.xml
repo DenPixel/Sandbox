@@ -17,6 +17,17 @@
         </appender>
     </logger>
 
+    <logger name="com.alevel.nix.java.hometask.lesson21" level="INFO" additivity="false">
+        <appender name="ASYNC_TIC_TAC_TOE" class="ch.qos.logback.classic.AsyncAppender">
+            <appender name="TIC-TAC-TOE" class="ch.qos.logback.core.ConsoleAppender">
+                <file>log/tic-tac-toe.txt</file>
+                <encoder>
+                    <pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>
+                </encoder>
+            </appender>
+        </appender>
+    </logger>
+
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
