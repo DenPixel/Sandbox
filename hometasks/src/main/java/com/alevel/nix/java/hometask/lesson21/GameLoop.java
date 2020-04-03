@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class GameLoop {
     private final static Logger log = LoggerFactory.getLogger(GameLoop.class);
 
-    public static void start(){
+    private static void start(){
         Gallows game = Gallows.build();
         Scanner scanner = new Scanner(System.in);
         int count = game.getCountClosedLetters();
@@ -40,5 +40,9 @@ public class GameLoop {
         } else{
             log.info("You are a loser :(");
         }
+    }
+
+    public static void main(String[] args) {
+        start();
     }
 }

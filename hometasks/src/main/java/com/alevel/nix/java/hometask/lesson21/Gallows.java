@@ -2,7 +2,6 @@ package com.alevel.nix.java.hometask.lesson21;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Gallows {
     private StringBuilder searchString;
@@ -15,28 +14,28 @@ public class Gallows {
         this.countClosedLetters = actualString.length();
     }
 
-    private static Optional<String> getRandomLine(){
+    private static String getRandomLine(){
         try(var resource = ClassLoader.getSystemResourceAsStream("Words.txt")){
 
             byte[] bytes = Objects.requireNonNull(resource).readAllBytes();
 
             String[] strings = new String(bytes).split(System.lineSeparator());
 
-            return Optional.ofNullable(strings[(int) (Math.random() * strings.length)]);
+            return strings[(int) (Math.random() * strings.length)];
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return Optional.empty();
+        return "";
     }
 
-    private static Optional<StringBuilder> getStartStr(int length){
+    private static StringBuilder getStartStr(int length){
         StringBuilder str = new StringBuilder();
 
         str.append("*".repeat(length));
 
-        return Optional.of(str);
+        return str;
     }
 
     public String getActualString() {
@@ -48,8 +47,8 @@ public class Gallows {
     }
 
     public static Gallows build(){
-        StringBuilder searchString = new StringBuilder(getRandomLine().get());
-        StringBuilder actualString = Objects.requireNonNull(getStartStr(searchString.length()).get());
+        StringBuilder searchString = new StringBuilder(getRandomLine());
+        StringBuilder actualString = getStartStr(searchString.length());
 
         return new Gallows(searchString, actualString);
     }
