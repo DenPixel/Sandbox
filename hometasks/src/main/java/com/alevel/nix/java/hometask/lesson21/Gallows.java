@@ -58,8 +58,12 @@ public class Gallows {
         int index = -1;
 
         while((index = searchString.indexOf(String.valueOf(searchChar),index+1)) >= 0){
-            actualString.replace(index,index+1,String.valueOf(searchChar));
-            countClosedLetters--;
+
+            if (actualString.charAt(index) == '*'){
+                actualString.setCharAt(index,searchChar);
+                countClosedLetters--;
+            }
+
             flag = true;
         }
 
