@@ -1,8 +1,7 @@
 package level3;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.*;
 
 public class Network {
@@ -10,9 +9,9 @@ public class Network {
     private final static int MAX_COUNT_CITY = 10_000;
     private final static int MAX_COUNT_WAY = 100;
     private final static String INPUT_PATH = ClassLoader.getSystemResource("input.txt").getPath();
-    private int[] minCosts;
-    private List<City> network = new ArrayList<>();
-    private List<String[]> ways = new ArrayList<>();
+    private final static String OUTPUT_PATH = "modules/module2/src/main/resources/output.txt";
+    private final List<City> network = new ArrayList<>();
+    private final List<String[]> ways = new ArrayList<>();
 
     public Network() {
         try(BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(INPUT_PATH))) {
@@ -40,77 +39,54 @@ public class Network {
                 ways.add(bufferedReader.readLine().split(" "));
             }
 
-            minCosts = new int[countWay];
-            Arrays.fill(minCosts, -1);
 
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
-
-
-    void counting(){
-        int indexCost = 0;
+    public void searchMinWayCosts(){
+        StringBuilder forOutput = new StringBuilder();
         for (String[] way : ways) {
             int startWay = getIndexCity(way[0]);
             int endWay = getIndexCity(way[1]);
 
-            for (int i : network.get(startWay-1).getIndexNextCities()){
-                int sum = costWay(
-                        getCostWay(startWay,i),
-                        indexCost,
-                        startWay,
-                        endWay,
-                        i,
-                        startWay
-                );
-                if (minCosts[indexCost] < 0){
-                    minCosts[indexCost] = sum;
-                }else {
-                    minCosts[indexCost] = Math.min(minCosts[indexCost],sum);
-                }
+            City city = network.get(startWay-1);
 
+            City endCity = network.get(endWay-1);
+
+            city.setWeight(0);
+
+            walkWay(city,endCity);
+
+            forOutput.append(endCity.getWeight());
+            forOutput.append(System.lineSeparator());
+
+            for (City tempCity : network) {
+                tempCity.setWeight(1_000_000);
             }
-            indexCost++;
         }
 
-        System.out.println(Arrays.toString(minCosts));
-
-
-    }
-
-    private int costWay(int sum, int indexCost, int indexStart, int indexEnd, int indexTemp, int indexPrev){
-
-        for (int i : network.get(indexTemp-1).getIndexNextCities()) {
-
-            if (i != indexStart && i != indexPrev && indexEnd != indexTemp){
-                sum = costWay(
-                        sum+getCostWay(indexTemp,i),
-                        indexCost,
-                        indexStart,
-                        indexEnd,
-                        i,
-                        indexTemp
-                );
-            }
-            if (indexEnd == indexTemp){
-                if (minCosts[indexCost] < 0){
-                    minCosts[indexCost] = sum;
-                }else {
-                    minCosts[indexCost] = Math.min(minCosts[indexCost], sum);
-                }
-                return minCosts[indexCost];
-            }
-
-        }
-
-        return minCosts[indexCost];
+        output(forOutput.toString());
     }
 
 
-    private int getCostWay(int indexStartCity, int indexNextCity){
-        return network.get(indexStartCity-1).getCostWay(indexNextCity);
+
+    private void walkWay(City city, City endCity){
+        if(city.getIndex() == endCity.getIndex()){
+            return;
+        }
+
+        Set<Integer> indexNextCities = city.getIndexNextCities();
+        City nextCity;
+
+        for (int indexNextCity : indexNextCities) {
+            nextCity = network.get(indexNextCity-1);
+            if ((city.getCostWay(indexNextCity) + city.getWeight()) < nextCity.getWeight()){
+                nextCity.setWeight(city.getCostWay(indexNextCity) + city.getWeight());
+                walkWay(nextCity, endCity);
+            }
+        }
     }
 
     private int getIndexCity(String nameCity){
@@ -121,9 +97,16 @@ public class Network {
                 .getIndex();
     }
 
+    private void output(String forOutput){
+        try(FileWriter writer = new FileWriter(OUTPUT_PATH)) {
+            writer.write(forOutput);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         Network n = new Network();
-        n.counting();
+        n.searchMinWayCosts();
     }
 }

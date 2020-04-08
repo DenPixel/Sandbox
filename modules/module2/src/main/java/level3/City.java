@@ -7,6 +7,7 @@ public class City {
     private String name;
     private int index;
     private SortedMap<Integer, Integer> neighboring;
+    private int weight = 1_000_000;
 
     public City(String name, int index, SortedMap<Integer, Integer> neighboring) {
         this.name = name;
@@ -32,5 +33,14 @@ public class City {
 
     public Set<Integer> getIndexNextCities(){
         return neighboring.keySet();
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }
