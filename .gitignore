@@ -9,3 +9,4 @@ log/
 *.csv
 
 !Words.txt
+temp/

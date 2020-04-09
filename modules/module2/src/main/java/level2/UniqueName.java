@@ -1,6 +1,7 @@
 package level2;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
@@ -9,30 +10,20 @@ public class UniqueName {
 
     public String getUniqueName(Collection<String> names){
 
-
-//        String s1 = new HashSet<>(names)
-//                .stream()
-//                .findFirst()
-//                .get();
-//
-//        return s1;
-
-        return names.stream()
+       return names.stream()
                 .collect(Collectors.groupingBy(
-                        s -> s,
+                        Function.identity(),
                         HashMap::new,
-                        Collectors.summingInt(s -> 1))
-                ).entrySet()
+                        Collectors.summingInt(s -> 1)
+                ))
+                .entrySet()
                 .stream()
-                .collect(Collectors.groupingBy(
-                        Map.Entry::getValue,
-                        TreeMap::new,
-                        mapping(Map.Entry::getKey,
-                                toList())
-                )).firstEntry()
-                .getValue()
-                .get(0);
+                .min(Comparator.comparingInt(Map.Entry::getValue))
+                .get()
+                .getKey();
+
     }
+
 
     public static void main(String[] args) {
         UniqueName un = new UniqueName();

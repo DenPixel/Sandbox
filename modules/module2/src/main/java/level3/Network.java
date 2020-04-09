@@ -109,7 +109,8 @@ public class Network {
     }
 
     public static void main(String[] args) {
-        Network n = new Network("modules/module2/temp/input.txt", "modules/module2/temp/output.txt");
+        Network n = new Network("modules/module2/src/main/java/level3/temp/input.txt",
+                "modules/module2/src/main/java/level3/temp/output.txt");
         n.searchMinWayCosts();
     }
 }
