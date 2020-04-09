@@ -8,16 +8,16 @@ public class Network {
     private final static int MAX_COST = 200_000;
     private final static int MAX_COUNT_CITY = 10_000;
     private final static int MAX_COUNT_WAY = 100;
-    private final  String INPUT_PATH;
-    private final  String OUTPUT_PATH;
+    private final  String inputPath;
+    private final  String outputPath;
     private final List<City> network = new ArrayList<>();
     private final List<String[]> ways = new ArrayList<>();
 
     public Network(String inputPath, String outputPath) {
-        INPUT_PATH = inputPath;
-        OUTPUT_PATH = outputPath;
+        this.inputPath = inputPath;
+        this.outputPath = outputPath;
 
-        try(BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(INPUT_PATH))) {
+        try(BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(this.inputPath))) {
 
             final int countCity = Math.min(Integer.parseInt(bufferedReader.readLine()), MAX_COUNT_CITY);
 
@@ -101,7 +101,7 @@ public class Network {
     }
 
     private void output(String forOutput){
-        try(FileWriter writer = new FileWriter(OUTPUT_PATH)) {
+        try(FileWriter writer = new FileWriter(outputPath)) {
             writer.write(forOutput);
         } catch (IOException e) {
             e.printStackTrace();
