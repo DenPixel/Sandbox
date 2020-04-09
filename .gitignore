@@ -9,5 +9,3 @@ log/
 *.csv
 
 !Words.txt
-!input.txt
-!output.txt

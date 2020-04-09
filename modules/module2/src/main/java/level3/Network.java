@@ -8,12 +8,15 @@ public class Network {
     private final static int MAX_COST = 200_000;
     private final static int MAX_COUNT_CITY = 10_000;
     private final static int MAX_COUNT_WAY = 100;
-    private final static String INPUT_PATH = ClassLoader.getSystemResource("input.txt").getPath();
-    private final static String OUTPUT_PATH = "modules/module2/src/main/resources/output.txt";
+    private final  String INPUT_PATH;
+    private final  String OUTPUT_PATH;
     private final List<City> network = new ArrayList<>();
     private final List<String[]> ways = new ArrayList<>();
 
-    public Network() {
+    public Network(String inputPath, String outputPath) {
+        INPUT_PATH = inputPath;
+        OUTPUT_PATH = outputPath;
+
         try(BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(INPUT_PATH))) {
 
             final int countCity = Math.min(Integer.parseInt(bufferedReader.readLine()), MAX_COUNT_CITY);
@@ -106,7 +109,7 @@ public class Network {
     }
 
     public static void main(String[] args) {
-        Network n = new Network();
+        Network n = new Network("modules/module2/temp/input.txt", "modules/module2/temp/output.txt");
         n.searchMinWayCosts();
     }
 }
