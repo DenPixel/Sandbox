@@ -3,8 +3,11 @@
 *.iml
 # Maven
 target/
-classwork/
+
 log/
 *.txt
 *.csv
+
 !Words.txt
+!input.txt
+!output.txt
