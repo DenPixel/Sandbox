@@ -1,14 +1,12 @@
 package com.alevel.jdbcbox.lesson24.level3;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.*;
 
 public class Network {
     private final static int MAX_COST = 200_000;
-    private List<City> network;
+    private Map<Integer,City> network;
 
     private static Properties loadProperties() {
 
@@ -24,7 +22,7 @@ public class Network {
     }
 
     public static Network build(){
-        List<City> network = new ArrayList<>();
+        Map<Integer,City> network = new HashMap<>();
 
         Properties properties = loadProperties();
         String url = properties.getProperty("url");
@@ -59,7 +57,7 @@ public class Network {
                             neighboring
                     );
 
-                    network.add(city);
+                    network.put(cities.getInt("id"),city);
                 }
             }
         } catch (SQLException e) {
@@ -69,7 +67,7 @@ public class Network {
         return new Network(network);
     }
 
-    private Network(List<City> network){
+    private Network(Map<Integer,City> network){
         this.network = network;
     }
 
@@ -88,9 +86,9 @@ public class Network {
                     int startWay = problems.getInt("from");
                     int endWay = problems.getInt("to");
 
-                    City city = network.get(startWay-1);
+                    City city = network.get(startWay);
 
-                    City endCity = network.get(endWay-1);
+                    City endCity = network.get(endWay);
 
                     city.setWeight(0);
 
@@ -98,10 +96,11 @@ public class Network {
 
                     problemAndResult.put(problems.getInt("id"), endCity.getWeight());
 
-                    for (City tempCity : network) {
-                        tempCity.setWeight(Integer.MAX_VALUE);
-                    }
+                    Iterator<Map.Entry<Integer, City>> iterator = network.entrySet().iterator();
 
+                    while (iterator.hasNext()) {
+                        iterator.next().getValue().setWeight(Integer.MAX_VALUE);
+                    }
                 }
             }
 
@@ -121,7 +120,7 @@ public class Network {
         City nextCity;
 
         for (int indexNextCity : indexNextCities) {
-            nextCity = network.get(indexNextCity-1);
+            nextCity = network.get(indexNextCity);
             if ((city.getCostWay(indexNextCity) + city.getWeight()) < nextCity.getWeight()){
                 nextCity.setWeight(city.getCostWay(indexNextCity) + city.getWeight());
                 walkWay(nextCity, endCity);
