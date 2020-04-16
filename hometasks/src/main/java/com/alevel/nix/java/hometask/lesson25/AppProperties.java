@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 public class AppProperties {
 
@@ -22,10 +21,10 @@ public class AppProperties {
 
     }
 
-    private static Properties loadProperties() {
+    private static Properties loadProperties(String path) {
         Properties props = new Properties();
 
-        try(InputStream input = AppProperties.class.getResourceAsStream("app.properties")) {
+        try(InputStream input = Files.newInputStream(Paths.get(path))) {
             props.load(input);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -34,26 +33,31 @@ public class AppProperties {
         return props;
     }
 
-    public static AppProperties build(){
-        Class<PropertyKey> propertyKeyClass = PropertyKey.class;
-        AppProperties appProp = new AppProperties();
-        Properties properties = loadProperties();
+    public static AppProperties build(String pathProperties){
+        AppProperties instance = new AppProperties();
+        Properties properties = loadProperties(pathProperties);
 
-        Class<? extends AppProperties> aClass = appProp.getClass();
+        try {
+            Class<? extends AppProperties> classOfInstance = instance.getClass();
 
-        List<Field> fieldsWithAnnoPropKey = Arrays.stream(aClass.getFields())
-                .filter(field -> field.isAnnotationPresent(propertyKeyClass))
-                .collect(Collectors.toList());
-        for (Field field : fieldsWithAnnoPropKey) {
-            field.setAccessible(true);
-            String nameProp = field.getAnnotation(propertyKeyClass).name();
-            try {
-                field.set(appProp, properties.get(nameProp));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            Field sp = classOfInstance.getField("sp");
+            Field lim = classOfInstance.getField("lim");
+
+            String nameProp;
+
+            nameProp = sp.getAnnotation(PropertyKey.class).name();
+            String propertySp = properties.getProperty(nameProp);
+            sp.setInt(instance, Integer.parseInt(propertySp));
+
+            nameProp = lim.getAnnotation(PropertyKey.class).name();
+            String propertyLim = properties.getProperty(nameProp);
+            lim.setInt(instance, Integer.parseInt(propertyLim));
+
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
         }
-        return appProp;
+
+        return instance;
     }
 
     public int getLim() {
@@ -69,7 +73,8 @@ public class AppProperties {
     }
 
     public static void main(String[] args) {
-        AppProperties build = AppProperties.build();
+        AppProperties build = AppProperties.build(
+                "hometasks/src/main/java/com/alevel/nix/java/hometask/lesson25/app.properties");
 
         System.out.println("limit = " + build.getLim());
         System.out.println("speed = " + build.getSp());
