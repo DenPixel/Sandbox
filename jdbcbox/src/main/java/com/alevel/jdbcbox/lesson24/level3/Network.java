@@ -14,7 +14,7 @@ public class Network {
 
         Properties props = new Properties();
 
-        try(InputStream input = Network.class.getResourceAsStream("JdbcBox.properties")) {
+        try(InputStream input = ClassLoader.getSystemResourceAsStream("JdbcBox.properties")) {
             props.load(input);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -157,13 +157,12 @@ public class Network {
                     }
                 }else {
                     try(PreparedStatement insertFoundRout = connection.prepareStatement(
-                            "INSERT INTO found_routes (id,min_cost) values (?,?)" +
-                                    "ON CONFLICT " +
-                                    "DO UPDATE SET min_cost = ? WHERE id=?")) {
+                            "INSERT INTO found_routes (id,min_cost) values (?,?) " +
+                                    "ON CONFLICT (id) " +
+                                    "DO UPDATE SET min_cost = ?")) {
                         insertFoundRout.setInt(1, next.getKey());
                         insertFoundRout.setInt(2,next.getValue());
                         insertFoundRout.setInt(3,next.getValue());
-                        insertFoundRout.setInt(4,next.getKey());
 
                         insertFoundRout.addBatch();
                         insertFoundRout.executeBatch();
