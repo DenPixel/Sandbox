@@ -73,8 +73,7 @@ public class AppProperties {
     }
 
     public static void main(String[] args) {
-        AppProperties build = AppProperties.build(
-                "hometasks/src/main/java/com/alevel/nix/java/hometask/lesson25/app.properties");
+        AppProperties build = AppProperties.build("hometasks/prop/app.properties");
 
         System.out.println("limit = " + build.getLim());
         System.out.println("speed = " + build.getSp());
