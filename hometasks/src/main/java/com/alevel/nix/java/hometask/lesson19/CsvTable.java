@@ -34,7 +34,8 @@ public class CsvTable {
         }
     }
 
-    private String[] getLine(int row){
+    public String[] getLine(int row){
+        isLegalRow(row);
         return table.get(row);
     }
 
@@ -89,7 +90,6 @@ public class CsvTable {
      * @return возвращает найденый елемент по индексам строки и колонки
      */
     public String getElement(int row, int col){
-        isLegalRow(row);
         isLegalCol(col);
 
         String[] line = getLine(row);
@@ -111,7 +111,8 @@ public class CsvTable {
 
         int indexCol = 0;
 
-        while (!headers[indexCol++].contains(headText)){
+        while (!headers[indexCol].contains(headText)){
+            indexCol++;
             if (indexCol >= headers.length){
                 throw new IllegalArgumentException();
             }
@@ -123,22 +124,7 @@ public class CsvTable {
 
     }
 
-
-    public static void main(String[] args) {
-        CsvTable table;
-
-        try {
-            table = new CsvTable("hometasks/src/main/java/com/alevel/nix/java/hometask/lesson19/something.csv");
-
-            System.out.println(table.getElement(2, 2));
-
-            System.out.println(table.getElement(0, "вок2"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public int getCountRows(){
+        return table.size();
     }
-
-
 }
