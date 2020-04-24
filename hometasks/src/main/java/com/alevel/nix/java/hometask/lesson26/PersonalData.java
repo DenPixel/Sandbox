@@ -23,4 +23,20 @@ public class PersonalData {
                 ", age=" + age +
                 '}';
     }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public int getAge() {
+        return age;
+    }
 }

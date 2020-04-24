@@ -34,7 +34,7 @@ public class CsvTable {
         }
     }
 
-    public String[] getLine(int row){
+    private String[] getLine(int row){
         isLegalRow(row);
         return table.get(row);
     }

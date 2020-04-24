@@ -4,9 +4,12 @@ import java.util.List;
 
 public class Runner{
     public static void main(String[] args) {
+        if (args.length <= 0) return;
+
         CSVMapper csvMapper = new CSVMapper();
+
         List<PersonalData> all = csvMapper.createAll(
-                "hometasks/src/main/java/com/alevel/nix/java/hometask/lesson26/personalData.csv",
+                args[0],
                 PersonalData.class
         );
 
