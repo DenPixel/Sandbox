@@ -7,40 +7,17 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CSVMapper {
-    private Map<Class<?>, Block> lambdaByClass = new HashMap<>();
-
-    public CSVMapper() {
-        lambdaByClass.put(int.class,
-                (target, field, prop) -> {
-                    field.setInt(target, Integer.parseInt(prop));
-                }
-        );
-        lambdaByClass.put(long.class,
-                (target, field, prop) -> {
-                    field.setLong(target, Long.parseLong(prop));
-                }
-        );
-        lambdaByClass.put(double.class,
-                (target, field, prop) -> {
-                    field.setDouble(target, Double.parseDouble(prop));
-                }
-        );
-        lambdaByClass.put(boolean.class,
-                (target, field, prop) -> {
-                    field.setBoolean(target, Boolean.parseBoolean(prop));
-                }
-        );
-        lambdaByClass.put(String.class,
-                (target, field, prop) -> {
-                    field.set(target, prop);
-                }
-        );
-    }
+    private final Map<Class<?>, Block> lambdaByClass = Map.of(
+            int.class, (target, field, prop) -> field.setInt(target, Integer.parseInt(prop)),
+            long.class, (target, field, prop) -> field.setLong(target, Long.parseLong(prop)),
+            double.class, (target, field, prop) -> field.setDouble(target, Double.parseDouble(prop)),
+            boolean.class, (target, field, prop) -> field.setDouble(target, Double.parseDouble(prop)),
+            String.class, (target, field, prop) -> field.set(target, prop)
+    );
 
     public <T> List<T> createAll(String pathToCSVFile, Class<T> tClass) {
         try {
