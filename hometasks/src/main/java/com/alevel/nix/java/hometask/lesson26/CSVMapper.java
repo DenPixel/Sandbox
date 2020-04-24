@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CSVMapper {
-    private final Map<Class<?>, Block> lambdaByClass = Map.of(
+    private final static Map<Class<?>, ChangesThroughReflection> LAMBDA_BY_CLASS = Map.of(
             int.class, (target, field, prop) -> field.setInt(target, Integer.parseInt(prop)),
             long.class, (target, field, prop) -> field.setLong(target, Long.parseLong(prop)),
             double.class, (target, field, prop) -> field.setDouble(target, Double.parseDouble(prop)),
@@ -37,8 +37,8 @@ public class CSVMapper {
                     Class<?> type = field.getType();
 
 
-                    if (lambdaByClass.containsKey(type)) {
-                        lambdaByClass.get(type).run(target,field,prop);
+                    if (LAMBDA_BY_CLASS.containsKey(type)) {
+                        LAMBDA_BY_CLASS.get(type).run(target,field,prop);
                     } else {
                         throw new UnsupportedOperationException("Unsupported field type (" +
                                 type.getName() + ") is required for field " +
