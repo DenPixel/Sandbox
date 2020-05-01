@@ -12,6 +12,8 @@
         <module>hometasks</module>
         <module>modules</module>
         <module>jdbcbox</module>
+        <module>jpabox</module>
+        <module>grafhiber</module>
     </modules>
 
     <properties>
