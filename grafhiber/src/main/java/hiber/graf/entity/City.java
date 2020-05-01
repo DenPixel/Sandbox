@@ -4,7 +4,9 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -19,21 +21,19 @@ public class City {
     @Column(nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "cityFrom")
+    private final Set<Connection> connections = new HashSet<>();
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private final List<Connection> connections = new ArrayList<>();
+    @OneToMany(mappedBy = "cityTo")
+    private final Set<Connection> connectionsOf = new HashSet<>();
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private final List<Connection> connectionsOf = new ArrayList<>();
-
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cityFrom")
     private final List<Problem> problems = new ArrayList<>();
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cityTo")
     private final List<Problem> problemsOf = new ArrayList<>();
 
     public City() {
-
     }
 
     public Long getId() {
@@ -52,11 +52,11 @@ public class City {
         this.name = name;
     }
 
-    public List<Connection> getConnections() {
+    public Set<Connection> getConnections() {
         return connections;
     }
 
-    public List<Connection> getConnectionsOf() {
+    public Set<Connection> getConnectionsOf() {
         return connectionsOf;
     }
 

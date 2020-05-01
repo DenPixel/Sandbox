@@ -1,20 +1,21 @@
 package hiber.graf.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "connections")
-public class Connection {
+public class Connection implements Serializable {
 
     @Id
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "from_id")
-    private City from;
+    private City cityFrom;
 
     @Id
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "to_id")
-    private City to;
+    private City cityTo;
 
     @Id
     @Column(nullable = false)
@@ -23,16 +24,20 @@ public class Connection {
     public Connection() {
     }
 
-    public Connection(Long cost) {
-        this.cost = cost;
+    public City getCityFrom() {
+        return cityFrom;
     }
 
-    public City getFrom() {
-        return from;
+    public void setCityFrom(City cityFrom) {
+        this.cityFrom = cityFrom;
     }
 
-    public City getTo() {
-        return to;
+    public City getCityTo() {
+        return cityTo;
+    }
+
+    public void setCityTo(City cityTo) {
+        this.cityTo = cityTo;
     }
 
     public Long getCost() {
@@ -44,9 +49,18 @@ public class Connection {
     }
 
     public void addConnection(City cityFrom, City cityTo){
-       from = cityFrom;
-       to = cityTo;
-       cityFrom.getConnections().add(this);
-       cityTo.getConnectionsOf().add(this);
+        this.cityFrom = cityFrom;
+        this.cityTo = cityTo;
+        cityFrom.getConnections().add(this);
+        cityTo.getConnectionsOf().add(this);
+        
+    }
+
+    public void addConnection(City cityFrom, City cityTo, Long cost){
+        this.cityFrom = cityFrom;
+        this.cityTo = cityTo;
+        cityFrom.getConnections().add(this);
+        cityTo.getConnectionsOf().add(this);
+        this.cost = cost;
     }
 }

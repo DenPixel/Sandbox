@@ -12,16 +12,15 @@ public class Problem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "from_id")
-    private City from;
+    private City cityFrom;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "to_id")
-    private City to;
+    private City cityTo;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "problem")
     private Route route;
 
     public Problem() {
@@ -35,12 +34,20 @@ public class Problem {
         this.id = id;
     }
 
-    public City getFrom() {
-        return from;
+    public City getCityFrom() {
+        return cityFrom;
     }
 
-    public City getTo() {
-        return to;
+    public void setCityFrom(City cityFrom) {
+        this.cityFrom = cityFrom;
+    }
+
+    public City getCityTo() {
+        return cityTo;
+    }
+
+    public void setCityTo(City cityTo) {
+        this.cityTo = cityTo;
     }
 
     public Route getRoute() {
@@ -52,14 +59,9 @@ public class Problem {
     }
 
     public void addProblem(City cityFrom, City cityTo){
-        from = cityFrom;
-        to = cityTo;
-        from.getProblems().add(this);
-        to.getProblemsOf().add(this);
-    }
-
-    public void addRoute(Route route){
-        this.route=route;
-        route.setProblemId(this);
+        this.cityFrom = cityFrom;
+        this.cityTo = cityTo;
+        cityFrom.getProblems().add(this);
+        cityTo.getProblemsOf().add(this);
     }
 }

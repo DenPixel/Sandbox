@@ -8,9 +8,13 @@ import javax.persistence.*;
 public class Route {
 
     @Id
-    @OneToOne(mappedBy="route")
+    @Column(name = "problem_id")
+    private Long problemId;
+
+    @OneToOne
     @JoinColumn(name = "problem_id")
-    private Problem problemId;
+    @MapsId
+    private Problem problem;
 
     @Column(name = "min_cost")
     private Long minCost;
@@ -18,12 +22,12 @@ public class Route {
     public Route() {
     }
 
-    public Problem getProblemId() {
-        return problemId;
+    public Problem getProblem() {
+        return problem;
     }
 
-    public void setProblemId(Problem problemId) {
-        this.problemId = problemId;
+    public void setProblem(Problem problemId) {
+        this.problem = problemId;
     }
 
     public Long getMinCost() {
@@ -32,10 +36,5 @@ public class Route {
 
     public void setMinCost(Long minCost) {
         this.minCost = minCost;
-    }
-
-    public void addProblem(Problem problem){
-        problemId=problem;
-        problem.setRoute(this);
     }
 }

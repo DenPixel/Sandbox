@@ -20,13 +20,9 @@ public class RunnerDemo {
         City city2 = new City();
         city2.setName("city2");
 
-        Connection connection1 = new Connection();
-        connection1.addConnection(city1,city2);
-        connection1.setCost(6L);
-
-        Connection connection2 = new Connection();
-        connection2.addConnection(city2,city1);
-        connection2.setCost(6L);
+        Connection connection = new Connection();
+        connection.addConnection(city1,city2);
+        connection.setCost(6L);
 
         Problem problem = new Problem();
         problem.addProblem(city1,city2);
@@ -41,7 +37,7 @@ public class RunnerDemo {
 
                 session.saveOrUpdate(city1);
                 session.saveOrUpdate(city2);
-                session.saveOrUpdate(connection1);
+                session.saveOrUpdate(connection);
                 session.saveOrUpdate(problem);
 
                 session.getTransaction().commit();
