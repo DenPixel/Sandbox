@@ -22,7 +22,7 @@ public class RunnerDemo {
 
         Connection connection = new Connection();
         connection.addConnection(city1,city2);
-        connection.setCost(6L);
+        connection.setCost(6);
 
         Problem problem = new Problem();
         problem.addProblem(city1,city2);

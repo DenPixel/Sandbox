@@ -3,10 +3,7 @@ package hiber.graf.entity;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -18,7 +15,7 @@ public class City {
     private Long id;
 
     @NaturalId
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "cityFrom")
@@ -33,7 +30,17 @@ public class City {
     @OneToMany(mappedBy = "cityTo")
     private final List<Problem> problemsOf = new ArrayList<>();
 
+    @Transient
+    private int weight = Integer.MAX_VALUE;
+
+    @Transient
+    private Map<Integer, Integer> adjacentCities;
+
     public City() {
+    }
+
+    public City(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -66,5 +73,41 @@ public class City {
 
     public List<Problem> getProblemsOf() {
         return problemsOf;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setWeightDefault(){
+        this.weight = Integer.MAX_VALUE;
+    }
+
+    public void setAdjacentCities(Collection<Connection> connections){
+        Map<Integer, Integer> adjacentCities = new HashMap<>();
+
+        for (Connection connection : connections) {
+            adjacentCities.put(connection.getCityTo().id.intValue(),
+                    connection.getCost());
+        }
+
+        this.adjacentCities = adjacentCities;
+    }
+
+    public Map<Integer, Integer> getAdjacentCities() {
+        return adjacentCities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return Objects.equals(id, city.id) &&
+                Objects.equals(name, city.name);
     }
 }

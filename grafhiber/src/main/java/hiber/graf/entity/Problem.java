@@ -26,6 +26,10 @@ public class Problem {
     public Problem() {
     }
 
+    public Problem(City cityFrom, City cityTo) {
+        addProblem(cityFrom, cityTo);
+    }
+
     public Long getId() {
         return id;
     }

@@ -11,7 +11,7 @@ public class Route {
     @Column(name = "problem_id")
     private Long problemId;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "problem_id")
     @MapsId
     private Problem problem;

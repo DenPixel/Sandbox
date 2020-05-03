@@ -17,11 +17,14 @@ public class Connection implements Serializable {
     @JoinColumn(name = "to_id")
     private City cityTo;
 
-    @Id
     @Column(nullable = false)
-    private Long cost;
+    private Integer cost;
 
     public Connection() {
+    }
+
+    public Connection(City cityFrom, City cityTo, Integer cost) {
+        addConnection(cityFrom, cityTo, cost);
     }
 
     public City getCityFrom() {
@@ -40,11 +43,11 @@ public class Connection implements Serializable {
         this.cityTo = cityTo;
     }
 
-    public Long getCost() {
+    public Integer getCost() {
         return cost;
     }
 
-    public void setCost(Long cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
     }
 
@@ -56,7 +59,7 @@ public class Connection implements Serializable {
         
     }
 
-    public void addConnection(City cityFrom, City cityTo, Long cost){
+    public void addConnection(City cityFrom, City cityTo, Integer cost){
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
         cityFrom.getConnections().add(this);
