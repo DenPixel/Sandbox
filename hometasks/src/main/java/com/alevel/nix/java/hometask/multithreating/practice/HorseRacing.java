@@ -48,14 +48,13 @@ public class HorseRacing {
 
     private class Horse implements Runnable{
         private int top;
-        private int speed = (int) (100 + Math.random()*100);
 
         @Override
         public void run() {
             int dist = distance;
             while (dist > 0){
-                sleepSecond();
-                dist -= speed;
+                sleep();
+                dist -= randomBetween(100, 200);
             }
 
             top = place.incrementAndGet();
@@ -63,12 +62,16 @@ public class HorseRacing {
             count.countDown();
         }
 
-        private void sleepSecond(){
+        private void sleep(){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(randomBetween(400, 500));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        private long  randomBetween(int from, int to){
+            return (long) (from + Math.random() * (to-from));
         }
 
         public int getTop() {
