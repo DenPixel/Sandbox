@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ThreadIOConsole implements Runnable {
 
     private String prevInput = "";
-    private StringBuilder input = new StringBuilder(prevInput);
+    private StringBuffer input = new StringBuffer(prevInput);
     private Scanner scanner = new Scanner(System.in);
     private String output;
 
