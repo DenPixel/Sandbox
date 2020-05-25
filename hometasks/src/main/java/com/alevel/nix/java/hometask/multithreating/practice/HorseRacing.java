@@ -5,40 +5,19 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class HorseRacing {
     private int countHorse = 5;
     private Scanner scanner = new Scanner(System.in);
     private PrintStream print = new PrintStream(System.out);
     private CountDownLatch count;
-    private static int place;
-
-    public HorseRacing() {
-    }
-
-    public HorseRacing(int countHorse) {
-        this.countHorse = countHorse;
-    }
-
-    public HorseRacing(int countHorse, InputStream inputStream) {
-        this.countHorse = countHorse;
-        this.scanner = new Scanner(inputStream);
-    }
-
-    public HorseRacing(int countHorse, OutputStream outputStream) {
-        this.countHorse = countHorse;
-        this.print = new PrintStream(outputStream);
-    }
-
-    public HorseRacing(int countHorse, InputStream inputStream, OutputStream outputStream) {
-        this.countHorse = countHorse;
-        this.scanner = new Scanner(inputStream);
-        this.print = new PrintStream(outputStream);
-    }
+    private AtomicInteger place = new AtomicInteger(0);
+    private int distance = 1000;
 
     public void start() throws InterruptedException {
         int numberChosenHorse;
-        place = 0;
+        place.set(0);
 
         print.println("Choose the number of the horse (from 1 to " + countHorse +"):");
         while (true){
@@ -50,7 +29,7 @@ public class HorseRacing {
                 break;
             }
         }
-        print.println("You have chosen " + numberChosenHorse + " horse");
+        print.println("You have chosen horse №" + numberChosenHorse);
 
         count = new CountDownLatch(countHorse);
 
@@ -69,17 +48,17 @@ public class HorseRacing {
 
     private class Horse implements Runnable{
         private int top;
-        private int speed = 100;
-        private int distance = 1000;
+        private int speed = (int) (100 + Math.random()*100);
 
         @Override
         public void run() {
-            while (distance > 0){
+            int dist = distance;
+            while (dist > 0){
                 sleepSecond();
-                distance -= speed;
+                dist -= speed;
             }
 
-            top = ++place;
+            top = place.incrementAndGet();
 
             count.countDown();
         }
@@ -94,6 +73,48 @@ public class HorseRacing {
 
         public int getTop() {
             return top;
+        }
+    }
+
+    public static class Builder{
+
+        private static final int MIN_COUNT_HORSE = 2;
+        private static final int MIN_DISTANCE = 300;
+
+        private HorseRacing horseRacing = new HorseRacing();
+
+        public Builder setCountHorse(int countHorse) {
+            if (countHorse >= MIN_COUNT_HORSE) horseRacing.countHorse = countHorse;
+            return this;
+        }
+
+        public Builder setScanner(InputStream inputStream) {
+            horseRacing.scanner = new Scanner(inputStream);
+            return this;
+        }
+
+        public Builder setPrint(OutputStream outputStream) {
+            horseRacing.print = new PrintStream(outputStream);
+            return this;
+        }
+
+        public Builder setScanner(Scanner scanner) {
+            horseRacing.scanner = scanner;
+            return this;
+        }
+
+        public Builder setPrint(PrintStream print) {
+            horseRacing.print = print;
+            return this;
+        }
+
+        public Builder setDistance(int distance) {
+            if (distance >= MIN_DISTANCE) horseRacing.distance = distance;
+            return this;
+        }
+
+        public HorseRacing build(){
+            return horseRacing;
         }
     }
 }
