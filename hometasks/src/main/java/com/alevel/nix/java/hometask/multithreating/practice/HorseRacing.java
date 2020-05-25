@@ -89,22 +89,22 @@ public class HorseRacing {
         }
 
         public Builder setScanner(InputStream inputStream) {
-            horseRacing.scanner = new Scanner(inputStream);
+            if (inputStream != null) horseRacing.scanner = new Scanner(inputStream);
             return this;
         }
 
         public Builder setPrint(OutputStream outputStream) {
-            horseRacing.print = new PrintStream(outputStream);
+            if (outputStream != null) horseRacing.print = new PrintStream(outputStream);
             return this;
         }
 
         public Builder setScanner(Scanner scanner) {
-            horseRacing.scanner = scanner;
+            if (scanner != null) horseRacing.scanner = scanner;
             return this;
         }
 
         public Builder setPrint(PrintStream print) {
-            horseRacing.print = print;
+            if (print != null) horseRacing.print = print;
             return this;
         }
 
