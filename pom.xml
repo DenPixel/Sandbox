@@ -14,6 +14,7 @@
         <module>jdbcbox</module>
         <module>grafhiber</module>
         <module>jeebox</module>
+        <module>springbox</module>
     </modules>
 
     <properties>
