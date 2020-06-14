@@ -1,5 +1,6 @@
-package com.nix.java.spring.springbox.databox;
+package com.nix.java.spring.springbox.databox.account;
 
+import com.nix.java.spring.springbox.databox.account.Account;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

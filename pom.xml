@@ -15,6 +15,7 @@
         <module>grafhiber</module>
         <module>jeebox</module>
         <module>springbox</module>
+        <module>todolist</module>
     </modules>
 
     <properties>

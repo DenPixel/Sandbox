@@ -1,4 +1,4 @@
-package com.nix.java.spring.springbox.databox;
+package com.nix.java.spring.springbox.databox.account;
 
 import org.hibernate.annotations.NaturalId;
 

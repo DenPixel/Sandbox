@@ -1,13 +1,14 @@
 package com.nix.java.spring.springbox;
 
-import com.nix.java.spring.springbox.databox.Account;
-import com.nix.java.spring.springbox.databox.AccountRepository;
+import com.nix.java.spring.springbox.databox.account.Account;
+import com.nix.java.spring.springbox.databox.account.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class SpringboxApplication {
@@ -18,6 +19,8 @@ public class SpringboxApplication {
 		SpringApplication.run(SpringboxApplication.class, args);
 	}
 
+
+	@Profile("spring-data-demo")
 	@Bean
 	public CommandLineRunner demo(AccountRepository repository) {
 		return (args) -> {
