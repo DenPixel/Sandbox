@@ -17,4 +17,6 @@ public interface TodoCRUD {
     Optional<Todo> deleteById(UUID id);
 
     List<Todo> getAllNotDone();
+
+    List<Todo> getAllTodoList();
 }

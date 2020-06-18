@@ -52,4 +52,9 @@ public class TodoService implements TodoCRUD {
     public List<Todo> getAllNotDone() {
         return repository.findAllByDoneFalse();
     }
+
+    @Override
+    public List<Todo> getAllTodoList() {
+        return repository.findAll();
+    }
 }
