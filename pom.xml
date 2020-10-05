@@ -9,13 +9,13 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>hometasks</module>
         <module>modules</module>
         <module>jdbcbox</module>
         <module>grafhiber</module>
         <module>jeebox</module>
         <module>springbox</module>
         <module>todolist</module>
+        <module>waterPipelineSystem</module>
     </modules>
 
     <properties>
